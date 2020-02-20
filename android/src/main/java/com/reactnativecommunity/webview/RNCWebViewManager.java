@@ -925,6 +925,12 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
       cleanupCallbacksAndDestroy();
     }
 
+    // Prevent HLS audio from going to sleep when app goes into background
+    @Override
+    protected void onWindowVisibilityChanged(int visibility) {
+      if (visibility != View.GONE) super.onWindowVisibilityChanged(View.VISIBLE);
+    }
+
     @Override
     protected void onSizeChanged(int w, int h, int ow, int oh) {
       super.onSizeChanged(w, h, ow, oh);
